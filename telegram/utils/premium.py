@@ -6,7 +6,7 @@ from core import bot
 
 from utils import config
 
-from utils.base import is_moder
+from utils.base import is_moder, get_username
 
 import utils.base as Ubase
 import template.app as Tapp
@@ -35,9 +35,10 @@ async def send_app_premium(
 ):
 
     moder_user = await is_moder(chat_id)
+    usename = await get_username(app.user_id)
 
     kb = Tapp.AppPremium.kb(app=app, chat_id=chat_id, gender=app.gender, page=page, moder=moder_user)
-    caption = Tapp.AppPremium.text.format(app=app)
+    caption = Tapp.AppPremium.text.format(app=app, username=usename)
 
 
     return await bot.send_photo(

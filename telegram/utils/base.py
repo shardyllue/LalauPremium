@@ -13,6 +13,20 @@ from core import bot
 from utils.config import STORAGE_GROUP, MODER_GROUP
 
 
+
+async def get_username(user_id : int) -> str:
+
+    user = await bot.get_chat(user_id)
+
+    if it:=user.username:
+        return f"@{it}"
+    
+    if len(fullname:=user.full_name) <= 2:
+        fullname = "перейти"
+
+    return f"<a href='tg://user?id={user.id}'>{fullname}</a>"
+
+
 async def is_moder(user_id : int) -> bool:
     user = await bot.get_chat_member(chat_id=MODER_GROUP, user_id=user_id)
     return user.status != "left"
