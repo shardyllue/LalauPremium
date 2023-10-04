@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "schedule"
+version = "0.0.1"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.10"
+aioschedule = "^0.5.2"
+sqlalchemy = "^2.0.21"
+python-dotenv = "^1.0.0"
+asyncpg = "^0.28.0"
+aiogram = "^3.1.1"
+fastapi = "^0.103.2"
+uvicorn = "^0.23.2"
+loguru = "^0.7.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
