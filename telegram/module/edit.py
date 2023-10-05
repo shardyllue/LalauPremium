@@ -14,6 +14,5 @@ class EditState(StatesGroup):
     name = State()
     years = State()
     city = State()
-    usrname = State()
     photo = State()
     video = State()

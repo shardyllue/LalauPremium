@@ -52,7 +52,6 @@ async def band_handler(
     apps = await Ubase.get_apps(db, gender)
     user_id = query.from_user.id
 
-    print(gender)
 
     if act == "open":
 

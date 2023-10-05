@@ -49,19 +49,12 @@ def kb_edit():
                 value="years"
             )
         ),
-    ).row(
         InlineKeyboardButton(
             text="Город",
             callback_data=Medit.EditCall.new(
                 value="city"
             )
         ),
-        InlineKeyboardButton(
-            text="@Имя",
-            callback_data=Medit.EditCall.new(
-                value="usrname"
-            )
-        )
     ).row(
         InlineKeyboardButton(
             text="Фото",
@@ -74,6 +67,10 @@ def kb_edit():
             callback_data=Medit.EditCall.new(
                 value="video"
             )
+        ),
+        InlineKeyboardButton(
+            text=" ",
+            callback_data="empty_value"
         )
     ).add(        
         InlineKeyboardButton(

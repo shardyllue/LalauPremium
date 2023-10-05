@@ -7,6 +7,7 @@ from db import AsyncSession
 from db.sql import update
 from db.base import AppTable
 
+from utils.base import get_username
 
 import utils.base as Ubase
 import template.moder as Tmoder
@@ -47,9 +48,11 @@ async def moderate(
         photo_id = app.photo_id
 
 
+    username = await get_username(app.user_id)
+
     await bot.send_photo(
         chat_id=config.MODER_GROUP,
         photo=photo_id,
-        caption=Tmoder.Moder.text.format(app=app),
+        caption=Tmoder.Moder.text.format(app=app, username=username),
         reply_markup=Tmoder.Moder.kb(app)
     )

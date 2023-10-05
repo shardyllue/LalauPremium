@@ -9,8 +9,6 @@ from lalau.base import AppTable
 
 
 text = """
-<b>Виртуальное общение</b>
-
 Город:  {app.city}
 Возраст:  {app.years}
 Имя:  {app.name}

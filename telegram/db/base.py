@@ -20,7 +20,6 @@ class AppTable(Base):
     name = Column(String(15))
     years = Column(Integer)
     city = Column(String(32))
-    usrname = Column(String(32))
     photo_id = Column(String(128))
     pub_video = Column(Boolean, default=False)
     video_id = Column(String(128))
@@ -34,7 +33,6 @@ class AppTable(Base):
         name : str,
         years : int,
         city : str,
-        usrname : str,
         photo_id : str = None,
         video_id : str = None,
         pub_video : bool = False,
@@ -45,7 +43,6 @@ class AppTable(Base):
         self.name = name
         self.years = years
         self.city = city
-        self.usrname = usrname
         self.photo_id = photo_id
         self.video_id = video_id
         self.pub_video = pub_video

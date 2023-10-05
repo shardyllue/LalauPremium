@@ -145,14 +145,6 @@ async def handler_btn(
                 reply_markup=Tedit.title(Tedit.edit_title_city)
             ))
         )
-    elif object == "usrname":
-        return await gather(
-            create_task(db.commit()),
-            create_task(Medit.EditState.usrname.set()),
-            create_task(query.message.edit_reply_markup(
-                reply_markup=Tedit.title(Tedit.edit_title_usrname)
-            ))
-        )
     elif object == "photo":
         return await gather(
             create_task(db.commit()),
@@ -306,44 +298,6 @@ async def set_city_handler(
         ctx=ctx,
         state=state
     )
-
-
-#Имя польхователя
-@dp.message_handler(
-    state=Medit.EditState.usrname,
-    content_types=types.ContentType.TEXT
-)
-async def set_usrname_handler(
-    ctx : types.Message, 
-    state : FSMContext, 
-    db : AsyncSession
-):
-    """
-    
-    Setter a username
-
-    """   
-    if not Uvalid.valid_usr(usrname:=ctx.text):
-        return await gather(
-            create_task(ctx.delete()),
-            create_task(db.close()),
-            create_task(Ubase.delay(ctx.answer(
-                text=Tregister.Usr.err
-            )))
-        )
-
-    await db.execute(
-        update(AppTable).where(
-            AppTable.user_id == ctx.from_user.id
-        ).values(usrname=usrname)
-    )
-
-    return await render_current_app(
-        db=db,
-        ctx=ctx,
-        state=state
-    )
-
 
 
 #Фото

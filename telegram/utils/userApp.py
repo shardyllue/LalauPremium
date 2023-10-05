@@ -5,6 +5,8 @@ from aiogram import types
 
 from utils.base import is_moder
 
+from utils.base import get_username
+
 import template.app as Tapp
 import static
 
@@ -19,6 +21,7 @@ async def send_app(
     
     """
 
+    username = await get_username(user_id=app.user_id)
 
     photo_id = (
         app.photo_id 
@@ -28,6 +31,6 @@ async def send_app(
     return await bot.send_photo(
         chat_id=chat_id,
         photo=photo_id,
-        caption=Tapp.AppUser.text.format(app=app),
+        caption=Tapp.AppUser.text.format(app=app, username=username),
         reply_markup=Tapp.AppUser.kb(app)
     )

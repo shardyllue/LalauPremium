@@ -11,7 +11,6 @@ class RegisterState(StatesGroup):
     name = State()
     years = State()
     city = State()
-    usr = State()
     photo = State()
     video = State()
     pub_video = State()

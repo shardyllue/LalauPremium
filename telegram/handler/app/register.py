@@ -328,55 +328,6 @@ async def register_city_handler(
             ),
         )
 
-    await ctx.answer_photo(
-        photo=Tregister.Usr.photo,
-        caption=Tregister.Usr.text,
-        reply_markup=Tregister.Usr.kb()
-    )
-
-    return await gather(
-        create_task(db.close()),
-        create_task(state.update_data(city=city)),
-        create_task(Mregister.RegisterState.usr.set())
-    )
-
-
-@dp.message_handler(
-    content_types=types.ContentTypes.TEXT,
-    state=Mregister.RegisterState.usr
-)
-async def register_usrname_handler(
-    ctx : types.Message,
-    db : AsyncSession,
-    state : FSMContext
-):
-    """
-    App main.
-
-    give a ppp to users
-    """
-    #Check if use want using default name from telegram
-    if (usrname:=ctx.text) == Tregister.Usr.btn_usr:
-        #If telegram's user is Nonw
-        if (usr_tg:=ctx.from_user.username) is None:
-            return await gather(
-                create_task(db.close()),
-                create_task(ctx.delete()),
-                create_task(Ubase.delay(
-                    ctx.answer(Tregister.Usr.err_tg))
-                )
-            )
-        
-        usrname = "@" + usr_tg
-    #Validate usrname from user
-    elif not Uvalid.valid_usr(usrname):
-        return await gather(
-            create_task(db.close()),
-            create_task(ctx.delete()),
-            create_task(Ubase.delay(
-                ctx.answer(Tregister.Usr.err))),
-        )
-
     data = await state.get_data()
     gender = data.get("gender")
     
@@ -398,7 +349,7 @@ async def register_usrname_handler(
 
     return await gather(
         create_task(db.close()),
-        create_task(state.update_data(usrname=usrname)),
+        create_task(state.update_data(city=city)),
         create_task(Mregister.RegisterState.photo.set())
     )
 
@@ -509,7 +460,6 @@ async def register_video_handler(
             name=data.get("name"),
             years=data.get("years"),
             city=data.get("city"),
-            usrname=data.get("usrname"),
             photo_id=data.get("photo_id"),
             video_id=video_id,
             pub_video=False,
@@ -568,7 +518,6 @@ async def register_finish_handler(
         name=data.get("name"),
         years=data.get("years"),
         city=data.get("city"),
-        usrname=data.get("usrname"),
         photo_id=data.get("photo_id"),
         video_id=data.get("video_id"),
         pub_video=pub_video,

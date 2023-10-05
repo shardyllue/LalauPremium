@@ -27,7 +27,7 @@ class AppUser:
 Имя:  {app.name}
 Пол:  {app.gender}
 Рейтинг:  {app.score}
-Пользователь:  {app.usrname}
+Пользователь:  {username}
     """
 
     delete =  """<b>Вы удалили анкету</b>\n\n<i>В любой момент Вы сможете создать её занова!</i>"""
