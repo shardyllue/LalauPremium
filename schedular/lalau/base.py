@@ -13,25 +13,6 @@ from sqlalchemy import (
 Base = declarative_base()
 
 
-class SubscribeTable(Base):
-    __tablename__ = "subscribe"
-
-
-    user_id = Column(BigInteger, primary_key=True)
-    active = Column(Boolean, default=False)
-    expire_data = Column(DateTime)
-
-
-    def __init__(
-        self, user_id : int,
-        active : bool,
-        expire_data : float
-    ):
-        self.user_id = user_id
-        self.active = active
-        self.expire_data = expire_data
-
-
 class AppTable(Base):
     __tablename__ = "app"
 
@@ -40,7 +21,6 @@ class AppTable(Base):
     name = Column(String(15))
     years = Column(Integer)
     city = Column(String(32))
-    usrname = Column(String(32))
     photo_id = Column(String(128))
     pub_video = Column(Boolean, default=False)
     video_id = Column(String(128))
